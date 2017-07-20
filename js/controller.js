@@ -4,20 +4,7 @@
     // Your starting point. Enjoy the ride!
     
     angular.module('controllerApp',[])
-    // .config(['$routeProvider',function($routeProvider){
-    //     $routeProvider
-    //     .when('/active',{
-
-    //     })
-    //     .when('/completed',{
-
-    //     })
-    //     .when('/',{
-
-    //     })
-
-    // }])
-    .controller('taskController',['$scope','$location','taskService',function($scope,$location,taskService){
+    .controller('taskController',['$scope','$location','$routeParams','taskService',function($scope,$location,$routeParams,taskService){
         
 
         var vm = $scope;
@@ -48,7 +35,7 @@
         //页面根据刷新获取全选按钮当前值
         vm.checkAll = Ser.controlAll();
         //单选按钮控制全选按扭
-         // 如果要监视对象数据的变化，需要传入第三个参数：true
+        // 如果要监视对象数据的变化，需要传入第三个参数：true
         vm.$watch('todoList',function(newValue,oldValue){
             // console.log(newValue);
             // console.log(oldValue);
@@ -60,7 +47,7 @@
             Ser.saveInfo();
         },true)
 
-          //全选按钮
+         // 全选按钮
         vm.isCompletedAll =function(){
             Ser.isCompletedAll(vm.checkAll);
         }
@@ -87,22 +74,38 @@
 
 
         //更具监视location的url判断
-        vm.status = undefined;
-        vm.location = $location;
-        vm.$watch('location.url()',function(newValue,oldValue){
-            // console.log(newValue);
-            switch(newValue){
-                case "/active":
+        // console.log($routeparams.status)
+        var status = $routeParams.status;
+         switch(status){
+                case "active":
                 vm.status = false;
                 break;
-                case "/completed":
+                case "completed":
                 vm.status = true;
                 break;
                 default:
                 vm.status = undefined;
                 break;
             }
-        })
+
+
+
+        // vm.status = undefined;
+        // vm.location = $location;
+        // vm.$watch('location.url()',function(newValue,oldValue){
+        //     console.log(newValue);
+        //     switch(newValue){
+        //         case "/active":
+        //         vm.status = false;
+        //         break;
+        //         case "/completed":
+        //         vm.status = true;
+        //         break;
+        //         default:
+        //         vm.status = undefined;
+        //         break;
+        //     }
+        // })
 
 
 

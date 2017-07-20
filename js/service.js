@@ -8,7 +8,7 @@
         var that = this;
 
         //获取本地存储中的数据
-        var todoList = JSON.parse($window.localStorage.getItem('todoList'));
+        var todoList = JSON.parse($window.localStorage.getItem('todoList'))||[];
         // var todoList = [
         //     {id:'1',isCompleted:false,name:'吃早饭'},
         //     {id:'2',isCompleted:false,name:'吃午饭'},
